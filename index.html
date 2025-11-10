@@ -31,12 +31,14 @@
     display: none; /* Oculto al inicio */
     max-width: 90%;
     max-height: 80%;
+    transition: opacity 0.5s ease-in-out;
   }
 
   #status {
     margin-top: 10px;
     font-size: 1.2em;
     color: red;
+    text-align: center;
   }
 </style>
 </head>
@@ -49,24 +51,10 @@
 <img id="mapImage" src="mi-mapa.png" alt="Mapa Secreto">
 
 <script>
-const correctPassword = "3218"; // Tu contraseña
+// Contraseña original con guiones
+const correctPassword = "3-21-18-1";
+
 const input = document.getElementById("passwordInput");
 const btn = document.getElementById("continueBtn");
 const status = document.getElementById("status");
-const map = document.getElementById("mapImage");
-
-btn.addEventListener("click", () => {
-  if(input.value === correctPassword){
-    status.textContent = "";
-    map.style.display = "block"; // Mostrar la imagen
-    input.disabled = true;        // Desactivar input
-    btn.disabled = true;          // Desactivar botón
-  } else {
-    status.textContent = "Contraseña incorrecta";
-    map.style.display = "none"; // Asegurarse que la imagen no se muestre
-  }
-});
-</script>
-
-</body>
-</html>
+const map = document.getElementById("mapImag
