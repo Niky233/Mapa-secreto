@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mini Terror</title>
+<style>
+  body {
+    background: black;
+    color: white;
+    font-family: monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  #message { font-size: 2.5em; margin: 10px; }
+  input, button { margin-top: 20px; font-size: 1.5em; padding: 10px; }
+  #puzzleImage { width: 400px; margin-top: 20px; transition: transform 0.5s; }
+  #zombieMessage { font-size: 1.5em; margin-top: 20px; color: red; display: none; }
+</style>
+</head>
+<body>
+
+<h1 id="message">¿QUIÉN ES?</h1>
+<img id="puzzleImage" src="rompecabezas.png" alt="Rompecabezas">
+<input type="text" id="password" placeholder="Escribe la contraseña">
+<button id="rotateBtn" style="display:none;">Girar Rompecabezas</button>
+<div id="zombieMessage">¡Pueden haber zombies cerca de la zona segura. ¡No dejes que te atrapen!</div>
+
+<script>
+const message = document.getElementById('message');
+const input = document.getElementById('password');
+const image = document.getElementById('puzzleImage');
+const rotateBtn = document.getElementById('rotateBtn');
+const zombieMessage = document.getElementById('zombieMessage');
+
+const correctPassword = "3218";
+let rotation = 0;
+
+input.addEventListener('input', () => {
+  if(input.value === correctPassword){
+    message.textContent = "CORRE";
+    rotateBtn.style.display = "block";
+    input.disabled = true;
+  }
+});
+
+rotateBtn.addEventListener('click', () => {
+  rotation += 90;
+  image.style.transform = `rotate(${rotation}deg)`;
+  zombieMessage.style.display = "block";
+});
+</script>
+
+</body>
+</html>
