@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Mini Terror</title>
+<title>Mapa Secreto</title>
 <style>
   body {
     background: black;
@@ -13,43 +13,58 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    margin: 0;
   }
-  #message { font-size: 2.5em; margin: 10px; }
-  input, button { margin-top: 20px; font-size: 1.5em; padding: 10px; }
-  #puzzleImage { width: 400px; margin-top: 20px; transition: transform 0.5s; }
-  #zombieMessage { font-size: 1.5em; margin-top: 20px; color: red; display: none; }
+
+  input, button {
+    margin: 10px;
+    font-size: 1.5em;
+    padding: 10px;
+    background: black;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+  }
+
+  #mapImage {
+    margin-top: 20px;
+    display: none; /* Oculto al inicio */
+    max-width: 90%;
+    max-height: 80%;
+  }
+
+  #status {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: red;
+  }
 </style>
 </head>
 <body>
 
-<h1 id="message">¿QUIÉN ES?</h1>
-<img id="puzzleImage" src="rompecabezas.png" alt="Rompecabezas">
-<input type="text" id="password" placeholder="Escribe la contraseña">
-<button id="rotateBtn" style="display:none;">Girar Rompecabezas</button>
-<div id="zombieMessage">¡Pueden haber zombies cerca de la zona segura. ¡No dejes que te atrapen!</div>
+<h1>Ingrese la contraseña</h1>
+<input type="text" id="passwordInput" placeholder="Contraseña">
+<button id="continueBtn">Continuar</button>
+<div id="status"></div>
+<img id="mapImage" src="mi-mapa.png" alt="Mapa Secreto">
 
 <script>
-const message = document.getElementById('message');
-const input = document.getElementById('password');
-const image = document.getElementById('puzzleImage');
-const rotateBtn = document.getElementById('rotateBtn');
-const zombieMessage = document.getElementById('zombieMessage');
+const correctPassword = "3218"; // Tu contraseña
+const input = document.getElementById("passwordInput");
+const btn = document.getElementById("continueBtn");
+const status = document.getElementById("status");
+const map = document.getElementById("mapImage");
 
-const correctPassword = "3218";
-let rotation = 0;
-
-input.addEventListener('input', () => {
+btn.addEventListener("click", () => {
   if(input.value === correctPassword){
-    message.textContent = "CORRE";
-    rotateBtn.style.display = "block";
-    input.disabled = true;
+    status.textContent = "";
+    map.style.display = "block"; // Mostrar la imagen
+    input.disabled = true;        // Desactivar input
+    btn.disabled = true;          // Desactivar botón
+  } else {
+    status.textContent = "Contraseña incorrecta";
+    map.style.display = "none"; // Asegurarse que la imagen no se muestre
   }
-});
-
-rotateBtn.addEventListener('click', () => {
-  rotation += 90;
-  image.style.transform = `rotate(${rotation}deg)`;
-  zombieMessage.style.display = "block";
 });
 </script>
 
