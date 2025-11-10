@@ -31,7 +31,6 @@
     display: none; /* Oculto al inicio */
     max-width: 90%;
     max-height: 80%;
-    transition: opacity 0.5s ease-in-out;
   }
 
   #status {
@@ -48,13 +47,31 @@
 <input type="text" id="passwordInput" placeholder="Contraseña">
 <button id="continueBtn">Continuar</button>
 <div id="status"></div>
-<img id="mapImage" src="mi-mapa.png" alt="Mapa Secreto">
+<img id="mapImage" src="rompecabezas.png" alt="Mapa Secreto">
 
 <script>
-// Contraseña original con guiones
-const correctPassword = "3-21-18-1";
+// Contraseña correcta
+const correctPassword = "321181";
 
 const input = document.getElementById("passwordInput");
 const btn = document.getElementById("continueBtn");
 const status = document.getElementById("status");
-const map = document.getElementById("mapImag
+const map = document.getElementById("mapImage");
+
+btn.addEventListener("click", () => {
+  let userInput = input.value;
+
+  if(userInput === correctPassword){
+    status.textContent = "";
+    map.style.display = "block";  // Mostrar la imagen
+    input.disabled = true;        // Bloquear input
+    btn.disabled = true;          // Bloquear botón
+  } else {
+    status.textContent = "El Dr. Hernandes no estaría orgulloso de eso. >:(";
+    map.style.display = "none";   // Ocultar imagen si estaba visible
+  }
+});
+</script>
+
+</body>
+</html>
